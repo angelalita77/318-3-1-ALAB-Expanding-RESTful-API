@@ -1,5 +1,5 @@
 import express from "express";
-import {posts} from "../data/post.mjs";
+import { posts } from "../data/post.mjs";
 const router = express.Router();
 
 // @route GET /api/posts
@@ -8,17 +8,22 @@ const router = express.Router();
 
 router
     .route("/")
-    .get( (req, res) => {
+    //READ
+    // @route GET /api/posts
+    // @desc Get all post
+    // @access Public
+    .get((req, res) => {
         res.json(posts);
     })
-    .post( (req, res) => {
-        console.log(req.body);
-        /*const {userId, title, content} = req.body; //grabbing data the client entered through req.body
-        let id = post[post.length - 1].id + 1; //creating a new id after last index
-                                               //ex: post[8] is the last index with id = 9
-                                               //then new id = 9+1 = 10
+    // @route POST /api/posts
+    // @desc Create a post
+    // @access Public
+    .post((req, res) => {
+        const { userId, title, content } = req.body; // grabbing data the client entered through req.body
+        let id = posts[posts.length - 1].id + 1; // creating a new id
+        // let id = posts.length++;
 
-        //creating a new oject that will be pushed to the post array
+        // creating a new object that will be pushed to the posts array
         if (userId && title && content) {
             const post = {
                 id: id,
@@ -26,13 +31,17 @@ router
                 title: title,
                 content: content,
             };
-            post.push(post);
-            res.json( post[post.length-1]);
+            posts.push(post);
+            res.json(posts[posts.length - 1]);
         } else {
-            res.json( {
-                error: "Insufficient Data"
-            });
-        }*/
-    }); 
+            res.json({ error: "Insufficient Data" });
+        }
+    });
 
-    export default router;
+//  @route GET /api/posts/:id
+//  @desc Get ONE post
+//  @access Public 
+
+
+
+export default router;
