@@ -13,8 +13,8 @@ export const comments = [
 // postId: the id of the post the comment was made on.
 // body: the text of the comment.
 
-{
-    "userId": 2
-    "postId": 1
-    "body": "This is the first comment."
-}
+// {
+//     "userId": 2
+//     "postId": 1
+//     "body": "This is the first comment."
+// }
