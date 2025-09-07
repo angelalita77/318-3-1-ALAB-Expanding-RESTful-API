@@ -1,5 +1,5 @@
 //Imports 
-import express, { Router } from "express";
+import express, { Router, urlencoded } from "express";
 import globalErr from "./globalErr_handling/globalErrHandling'.mjs";
 import postRoutes from "./routes/postRoutes.mjs";
 
@@ -10,7 +10,8 @@ const PORT = 3000;
 
 
 // Middleware
-
+app.use(express.urlencoded( {extended: true})); //you can use post requests with JSON
+app.use(express.json()); //parses your JSON data
 
 
 // Routes
