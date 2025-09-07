@@ -3,6 +3,7 @@ import express, { Router, urlencoded } from "express";
 import globalErr from "./globalErr_handling/globalErrHandling'.mjs";
 import userRoutes from "./routes/userRoutes.mjs";
 import postRoutes from "./routes/postRoutes.mjs";
+import commentRoutes from "./routes/commentRoutes.mjs"
 import morgan from "morgan";
 
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded( {extended: true})); //you can use post requests with
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 
 
