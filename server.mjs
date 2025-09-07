@@ -2,6 +2,7 @@
 import express, { Router, urlencoded } from "express";
 import globalErr from "./globalErr_handling/globalErrHandling'.mjs";
 import postRoutes from "./routes/postRoutes.mjs";
+import morgan from "morgan";
 
 
 // Env Setup
@@ -10,8 +11,10 @@ const PORT = 3000;
 
 
 // Middleware
-app.use(express.urlencoded( {extended: true})); //you can use post requests with JSON
+app.use(morgan('tiny')); // for displaying log request, path, how long to execute request
 app.use(express.json()); //parses your JSON data
+app.use(express.urlencoded( {extended: true})); //you can use post requests with JSON
+
 
 
 // Routes
