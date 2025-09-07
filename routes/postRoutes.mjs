@@ -38,10 +38,55 @@ router
         }
     });
 
-//  @route GET /api/posts/:id
-//  @desc Get ONE post
-//  @access Public 
+// GET, POST, PATCH, DELETE /api/posts/:id
+router
+    .route("/:id")
+    //  @route GET /api/posts/:id
+    //  @desc Get ONE post
+    //  @access Public
+    .get((req, res) => {
+        const post = posts.find((post) => post.id == req.params.id);
 
+        if (post) res.json(post);
+        else next();
+    })
+    //  @route POST /api/posts/:id
+    //  @desc create ONE post
+    //  @access Public
+    .patch((req, res, next) => {
+        // find the item that the client wants to update
+        const id = req.params.id;
+        const data = req.body;
+        const post = posts.find((post, i) => {
+            if (post.id == id) {
+                for (const item in data) {
+                    // in the posts array grab the post that the client wants to change
+                    posts[i][item] = data[item]; // make the change
+                }
+                return true;
+            }
+        });
+
+        // send a response
+        if (post) {
+            res.json(posts);
+        } else next();
+    })
+    .delete((req, res, next) => {
+        // find the post that the client want to delete
+        const id = req.params.id;
+        const post = posts.find((post, i) => {
+            if (post.id == id) {
+                posts.splice(i, 1); // remove the post at index i
+                return true;
+            }
+        });
+
+        // send the client a response
+        if (post) {
+            res.json(posts);
+        } else next();
+    });
 
 
 export default router;
