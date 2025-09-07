@@ -38,27 +38,63 @@ router
         res.json(users);
     })
 
-    // GET, POST, PATCH, DELETE /api/users/:id
+// GET, POST, PATCH, DELETE /api/users/:id
 router
     .route("/:id")
     //  @route GET /api/users/:id
-//  @desc Get ONE user
-//  @access Public
-.get( (req, res) => {
-    res.json( {msg: 'Testing read by id'})
-})
-.patch( (req, res) => {
-    res.json( {msg: `Testing update`});
-})
+    //  @desc Get ONE user
+    //  @access Public
+    .get((req, res) => {
+        const user = users.find((user) => user.id == req.params.id);
 
-// Delete
-.delete( (req, res) => {
-    res.json( {msg: `Testing delete`});
-})
+        if (user) res.json(user);
+        else next();
+    })
+    //  @route PATCH /api/users/:id
+    //  @desc Update ONE user by id
+    //  @access Public
+    .patch((req, res, next) => {
+        // find the user that the client wants to change
+        const id = req.params.id;
+        const data = req.body;
+        // go through each object element
+        // for each object, see if the id matches,
+        // if matches save the data object into that index of the users array
+        const user = users.find((user, i) => { 
+            if (user.id == id) {
+                for (const item in data) {
+                    users[i][item] = data[item]; // make the changes
+                }
+                return true;
+            }
+        });
+
+        // once the change is made
+        // send a response back to the client
+
+        if (user) {
+            res.json(users);
+        } else next(); //else (if id is not found) do nothing
+    })
+
+    // Delete
+    .delete((req, res, next) => {
+    // find user the client wants to delete
+    const id = req.params.id;
+    const user = users.find((user, i) => {
+      if (user.id == id) {
+        users.splice(i, 1); // remove the user at index i
+        return true;
+      }
+    });
+
+    // send a response back to the client
+    if (user) {
+      res.json(users);
+    } else next();
+  });
 
 
-//  @route GET /api/users/:id
-//  @desc Get ONE user
-//  @access Public
+
 
 export default router;
