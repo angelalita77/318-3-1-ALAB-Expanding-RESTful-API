@@ -1,6 +1,6 @@
 # ALAB 318.3.1: Expanding a RESTful API
 #### Version 1.0, 07/23/23
-Click here to open in a separate window.
+
 ## Introduction
 This assignment will ask you to expand the example REST API application that was explored during the lesson, adding additional routes and features that are common with an API of its kind.
 Feel free to reference the lesson materials, express documentation, and other resources when creating these additional features, but think critically about how you want to approach your own solution. Sometimes, the way things are presented the first time are not the best way to do them!
