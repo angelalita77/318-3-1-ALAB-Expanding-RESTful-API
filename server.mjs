@@ -1,6 +1,7 @@
 //Imports 
 import express, { Router } from "express";
-import globalErr from "./globalErr_handling/globalErrHandling'.mjs"
+import globalErr from "./globalErr_handling/globalErrHandling'.mjs";
+import postRoutes from "./routes/postRoutes.mjs";
 
 
 // Env Setup
@@ -13,6 +14,7 @@ const PORT = 3000;
 
 
 // Routes
+app.use("/api/posts", postRoutes);
 
 
 
